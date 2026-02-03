@@ -12,11 +12,18 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->orderByDesc('created_at')->paginate(10);
+        $query = Product::with('category')->orderByDesc('created_at');
+        
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+        
+        $products = $query->paginate(10);
+        $categories = Category::orderBy('name')->get();
 
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products', 'categories'));
     }
 
     /**

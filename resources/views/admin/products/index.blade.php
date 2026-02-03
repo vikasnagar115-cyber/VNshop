@@ -3,9 +3,27 @@
 @section('title', 'Products')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-0">Products</h2>
     <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Add Product</a>
+</div>
+
+<div class="mb-4">
+    <form method="GET" action="{{ route('admin.products.index') }}" id="categoryFilter">
+        <div class="d-flex gap-2 align-items-center">
+            <label for="category_id" class="form-label mb-0">Filter by Category:</label>
+            <select name="category_id" id="category_id" class="form-select" style="max-width: 300px;" onchange="document.getElementById('categoryFilter').submit();">
+                <option value="">All Categories</option>
+                @if(isset($categories) && count($categories))
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" @if(request('category_id') == $category->id) selected @endif>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
+    </form>
 </div>
 
 <table class="table table-striped align-middle">
