@@ -23,6 +23,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/users/export', [UserController::class, 'export'])->name('users.export');
     Route::resource('users', UserController::class);
 
+    // Product exports
+    Route::get('/products/export/pdf', [ProductController::class, 'exportPdf'])->name('products.export.pdf');
+    Route::get('/products/export/excel', [ProductController::class, 'exportExcel'])->name('products.export.excel');
+    Route::get('/products/export/csv', [ProductController::class, 'exportCsv'])->name('products.export.csv');
+
     Route::resource('customers', CustomerController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);

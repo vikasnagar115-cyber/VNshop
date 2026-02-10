@@ -1,0 +1,480 @@
+[1mdiff --git a/app/Http/Controllers/Admin/ProductController.php b/app/Http/Controllers/Admin/ProductController.php[m
+[1mindex 7bb348c..cff25bd 100644[m
+[1m--- a/app/Http/Controllers/Admin/ProductController.php[m
+[1m+++ b/app/Http/Controllers/Admin/ProductController.php[m
+[36m@@ -12,18 +12,11 @@[m [mclass ProductController extends Controller[m
+     /**[m
+      * Display a listing of the resource.[m
+      */[m
+[31m-    public function index(Request $request)[m
+[32m+[m[32m    public function index()[m
+     {[m
+[31m-        $query = Product::with('category')->orderByDesc('created_at');[m
+[31m-        [m
+[31m-        if ($request->filled('category_id')) {[m
+[31m-            $query->where('category_id', $request->category_id);[m
+[31m-        }[m
+[31m-        [m
+[31m-        $products = $query->paginate(10);[m
+[31m-        $categories = Category::orderBy('name')->get();[m
+[32m+[m[32m        $products = Product::with('category')->orderByDesc('created_at')->paginate(10);[m
+ [m
+[31m-        return view('admin.products.index', compact('products', 'categories'));[m
+[32m+[m[32m        return view('admin.products.index', compact('products'));[m
+     }[m
+ [m
+     /**[m
+[1mdiff --git a/database/seeders/CategorySeeder.php b/database/seeders/CategorySeeder.php[m
+[1mdeleted file mode 100644[m
+[1mindex 9f0fb8c..0000000[m
+[1m--- a/database/seeders/CategorySeeder.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,104 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace Database\Seeders;[m
+[31m-[m
+[31m-use App\Models\Category;[m
+[31m-<<<<<<< Updated upstream[m
+[31m-<<<<<<< Updated upstream[m
+[31m-=======[m
+[31m-use Illuminate\Database\Console\Seeds\WithoutModelEvents;[m
+[31m->>>>>>> Stashed changes[m
+[31m-=======[m
+[31m-use Illuminate\Database\Console\Seeds\WithoutModelEvents;[m
+[31m->>>>>>> Stashed changes[m
+[31m-use Illuminate\Database\Seeder;[m
+[31m-[m
+[31m-class CategorySeeder extends Seeder[m
+[31m-{[m
+[31m-<<<<<<< Updated upstream[m
+[31m-<<<<<<< Updated upstream[m
+[31m-    /**[m
+[31m-     * Seed the application's database.[m
+[31m-=======[m
+[31m-=======[m
+[31m->>>>>>> Stashed changes[m
+[31m-    use WithoutModelEvents;[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Run the database seeds.[m
+[31m-<<<<<<< Updated upstream[m
+[31m->>>>>>> Stashed changes[m
+[31m-=======[m
+[31m->>>>>>> Stashed changes[m
+[31m-     */[m
+[31m-    public function run(): void[m
+[31m-    {[m
+[31m-        $categories = [[m
+[31m-            [[m
+[31m-                'name' => 'Electronics',[m
+[31m-                'description' => 'Electronic devices and gadgets',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Clothing',[m
+[31m-<<<<<<< Updated upstream[m
+[31m-<<<<<<< Updated upstream[m
+[31m-                'description' => 'Fashion and apparel items',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Books',[m
+[31m-                'description' => 'Books and reading materials',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Home & Kitchen',[m
+[31m-                'description' => 'Home and kitchen essentials',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Sports',[m
+[31m-                'description' => 'Sports equipment and gear',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Beauty & Personal Care',[m
+[31m-                'description' => 'Beauty and personal care products',[m
+[31m-=======[m
+[31m-=======[m
+[31m->>>>>>> Stashed changes[m
+[31m-                'description' => 'Men, Women and Kids clothing',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Books',[m
+[31m-                'description' => 'Physical and digital books',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Home & Kitchen',[m
+[31m-                'description' => 'Home appliances and kitchen items',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Sports',[m
+[31m-                'description' => 'Sports equipment and accessories',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Beauty & Personal Care',[m
+[31m-                'description' => 'Beauty products and personal care items',[m
+[31m-<<<<<<< Updated upstream[m
+[31m->>>>>>> Stashed changes[m
+[31m-=======[m
+[31m->>>>>>> Stashed changes[m
+[31m-            ],[m
+[31m-        ];[m
+[31m-[m
+[31m-        foreach ($categories as $category) {[m
+[31m-            Category::firstOrCreate([m
+[31m-                ['name' => $category['name']],[m
+[31m-<<<<<<< Updated upstream[m
+[31m-<<<<<<< Updated upstream[m
+[31m-                ['description' => $category['description']][m
+[31m-=======[m
+[31m-                $category[m
+[31m->>>>>>> Stashed changes[m
+[31m-=======[m
+[31m-                $category[m
+[31m->>>>>>> Stashed changes[m
+[31m-            );[m
+[31m-        }[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/database/seeders/ProductSeeder.php b/database/seeders/ProductSeeder.php[m
+[1mdeleted file mode 100644[m
+[1mindex facf606..0000000[m
+[1m--- a/database/seeders/ProductSeeder.php[m
+[1m+++ /dev/null[m
+[36m@@ -1,315 +0,0 @@[m
+[31m-<?php[m
+[31m-[m
+[31m-namespace Database\Seeders;[m
+[31m-[m
+[31m-<<<<<<< Updated upstream[m
+[31m-<<<<<<< Updated upstream[m
+[31m-use App\Models\Product;[m
+[31m-use App\Models\Category;[m
+[31m-=======[m
+[31m-use App\Models\Category;[m
+[31m-use App\Models\Product;[m
+[31m-use Illuminate\Database\Console\Seeds\WithoutModelEvents;[m
+[31m->>>>>>> Stashed changes[m
+[31m-=======[m
+[31m-use App\Models\Category;[m
+[31m-use App\Models\Product;[m
+[31m-use Illuminate\Database\Console\Seeds\WithoutModelEvents;[m
+[31m->>>>>>> Stashed changes[m
+[31m-use Illuminate\Database\Seeder;[m
+[31m-[m
+[31m-class ProductSeeder extends Seeder[m
+[31m-{[m
+[31m-<<<<<<< Updated upstream[m
+[31m-<<<<<<< Updated upstream[m
+[31m-    /**[m
+[31m-     * Seed the application's database.[m
+[31m-     */[m
+[31m-    public function run(): void[m
+[31m-    {[m
+[31m-        $products = [[m
+[31m-            [[m
+[31m-                'name' => 'Laptop Dell XPS 13',[m
+[31m-                'sku' => 'DELL-XPS-13-001',[m
+[31m-                'category' => 'Electronics',[m
+[31m-                'price' => 999.99,[m
+[31m-                'stock' => 15,[m
+[31m-                'description' => 'High-performance laptop with Intel i5 processor',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'iPhone 15 Pro',[m
+[31m-                'sku' => 'IPHONE-15-PRO-001',[m
+[31m-                'category' => 'Electronics',[m
+[31m-                'price' => 1299.99,[m
+[31m-                'stock' => 20,[m
+[31m-                'description' => 'Latest Apple iPhone with A17 Pro chip',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Samsung TV 55"',[m
+[31m-                'sku' => 'SAMSUNG-TV-55-001',[m
+[31m-                'category' => 'Electronics',[m
+[31m-                'price' => 799.99,[m
+[31m-                'stock' => 8,[m
+[31m-                'description' => '4K Ultra HD Smart TV',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Wireless Headphones Sony',[m
+[31m-                'sku' => 'SONY-WH-1000XM5-001',[m
+[31m-                'category' => 'Electronics',[m
+[31m-                'price' => 349.99,[m
+[31m-                'stock' => 30,[m
+[31m-                'description' => 'Noise-cancelling wireless headphones',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Cotton T-Shirt Blue',[m
+[31m-                'sku' => 'TSHIRT-BLUE-M-001',[m
+[31m-                'category' => 'Clothing',[m
+[31m-                'price' => 29.99,[m
+[31m-                'stock' => 100,[m
+[31m-                'description' => '100% cotton comfortable t-shirt',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Denim Jeans Black',[m
+[31m-                'sku' => 'JEANS-BLACK-32-001',[m
+[31m-                'category' => 'Clothing',[m
+[31m-                'price' => 59.99,[m
+[31m-                'stock' => 50,[m
+[31m-                'description' => 'Classic black denim jeans',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Running Shoes Nike',[m
+[31m-                'sku' => 'NIKE-RUN-001',[m
+[31m-                'category' => 'Clothing',[m
+[31m-                'price' => 119.99,[m
+[31m-                'stock' => 40,[m
+[31m-                'description' => 'Comfortable running shoes for daily wear',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'The Great Gatsby',[m
+[31m-                'sku' => 'BOOK-GATSBY-001',[m
+[31m-                'category' => 'Books',[m
+[31m-                'price' => 14.99,[m
+[31m-                'stock' => 60,[m
+[31m-                'description' => 'Classic novel by F. Scott Fitzgerald',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'To Kill a Mockingbird',[m
+[31m-                'sku' => 'BOOK-MOCKINGBIRD-001',[m
+[31m-                'category' => 'Books',[m
+[31m-                'price' => 12.99,[m
+[31m-                'stock' => 45,[m
+[31m-                'description' => 'Pulitzer Prize-winning novel',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Python Programming Guide',[m
+[31m-                'sku' => 'BOOK-PYTHON-001',[m
+[31m-                'category' => 'Books',[m
+[31m-                'price' => 44.99,[m
+[31m-                'stock' => 25,[m
+[31m-                'description' => 'Comprehensive guide to Python programming',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Stainless Steel Cookware Set',[m
+[31m-                'sku' => 'COOKWARE-SET-001',[m
+[31m-                'category' => 'Home & Kitchen',[m
+[31m-                'price' => 149.99,[m
+[31m-                'stock' => 20,[m
+[31m-                'description' => '10-piece cookware set with non-stick coating',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Coffee Maker Deluxe',[m
+[31m-                'sku' => 'COFFEE-MAKER-001',[m
+[31m-                'category' => 'Home & Kitchen',[m
+[31m-                'price' => 89.99,[m
+[31m-                'stock' => 35,[m
+[31m-                'description' => 'Programmable coffee maker with thermal carafe',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Football Soccer Ball Pro',[m
+[31m-                'sku' => 'FOOTBALL-PRO-001',[m
+[31m-                'category' => 'Sports',[m
+[31m-                'price' => 49.99,[m
+[31m-                'stock' => 55,[m
+[31m-                'description' => 'Professional-grade football for competitive play',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Yoga Mat Premium',[m
+[31m-                'sku' => 'YOGA-MAT-001',[m
+[31m-                'category' => 'Sports',[m
+[31m-                'price' => 39.99,[m
+[31m-                'stock' => 70,[m
+[31m-                'description' => 'Non-slip yoga mat with carrying strap',[m
+[31m-=======[m
+[31m-=======[m
+[31m->>>>>>> Stashed changes[m
+[31m-    use WithoutModelEvents;[m
+[31m-[m
+[31m-    /**[m
+[31m-     * Run the database seeds.[m
+[31m-     */[m
+[31m-    public function run(): void[m
+[31m-    {[m
+[31m-        // Get categories[m
+[31m-        $electronics = Category::where('name', 'Electronics')->first();[m
+[31m-        $clothing = Category::where('name', 'Clothing')->first();[m
+[31m-        $books = Category::where('name', 'Books')->first();[m
+[31m-        $home = Category::where('name', 'Home & Kitchen')->first();[m
+[31m-        $sports = Category::where('name', 'Sports')->first();[m
+[31m-        $beauty = Category::where('name', 'Beauty & Personal Care')->first();[m
+[31m-[m
+[31m-        $products = [[m
+[31m-            // Electronics[m
+[31m-            [[m
+[31m-                'name' => 'Wireless Headphones',[m
+[31m-                'sku' => 'WH-001',[m
+[31m-                'category_id' => $electronics->id,[m
+[31m-                'price' => 2999.00,[m
+[31m-                'stock' => 50,[m
+[31m-                'description' => 'Premium wireless headphones with noise cancellation',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'USB-C Cable',[m
+[31m-                'sku' => 'USB-001',[m
+[31m-                'category_id' => $electronics->id,[m
+[31m-                'price' => 499.00,[m
+[31m-                'stock' => 100,[m
+[31m-                'description' => 'Durable USB-C charging and data transfer cable',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Power Bank 20000mAh',[m
+[31m-                'sku' => 'PB-001',[m
+[31m-                'category_id' => $electronics->id,[m
+[31m-                'price' => 1499.00,[m
+[31m-                'stock' => 75,[m
+[31m-                'description' => 'Fast charging power bank with dual ports',[m
+[31m-            ],[m
+[31m-            // Clothing[m
+[31m-            [[m
+[31m-                'name' => 'Cotton T-Shirt',[m
+[31m-                'sku' => 'CT-001',[m
+[31m-                'category_id' => $clothing->id,[m
+[31m-                'price' => 599.00,[m
+[31m-                'stock' => 150,[m
+[31m-                'description' => 'Comfortable 100% cotton t-shirt',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Jeans',[m
+[31m-                'sku' => 'JN-001',[m
+[31m-                'category_id' => $clothing->id,[m
+[31m-                'price' => 1299.00,[m
+[31m-                'stock' => 80,[m
+[31m-                'description' => 'Classic blue denim jeans',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Hoodie',[m
+[31m-                'sku' => 'HD-001',[m
+[31m-                'category_id' => $clothing->id,[m
+[31m-                'price' => 1799.00,[m
+[31m-                'stock' => 60,[m
+[31m-                'description' => 'Warm and cozy hoodie',[m
+[31m-            ],[m
+[31m-            // Books[m
+[31m-            [[m
+[31m-                'name' => 'Laravel Guide',[m
+[31m-                'sku' => 'BK-001',[m
+[31m-                'category_id' => $books->id,[m
+[31m-                'price' => 799.00,[m
+[31m-                'stock' => 40,[m
+[31m-                'description' => 'Complete guide to Laravel web development',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'The Art of Programming',[m
+[31m-                'sku' => 'BK-002',[m
+[31m-                'category_id' => $books->id,[m
+[31m-                'price' => 899.00,[m
+[31m-                'stock' => 35,[m
+[31m-                'description' => 'Master the fundamentals of programming',[m
+[31m-            ],[m
+[31m-            // Home & Kitchen[m
+[31m-            [[m
+[31m-                'name' => 'Coffee Maker',[m
+[31m-                'sku' => 'HK-001',[m
+[31m-                'category_id' => $home->id,[m
+[31m-                'price' => 2499.00,[m
+[31m-                'stock' => 30,[m
+[31m-                'description' => 'Automatic drip coffee maker',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Cooking Spoon Set',[m
+[31m-                'sku' => 'HK-002',[m
+[31m-                'category_id' => $home->id,[m
+[31m-                'price' => 549.00,[m
+[31m-                'stock' => 90,[m
+[31m-                'description' => 'Non-stick cooking spoon set (5 pieces)',[m
+[31m-            ],[m
+[31m-            // Sports[m
+[31m-            [[m
+[31m-                'name' => 'Yoga Mat',[m
+[31m-                'sku' => 'SP-001',[m
+[31m-                'category_id' => $sports->id,[m
+[31m-                'price' => 1099.00,[m
+[31m-                'stock' => 45,[m
+[31m-                'description' => 'Non-slip yoga mat for all exercises',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Dumbbells (5kg pair)',[m
+[31m-                'sku' => 'SP-002',[m
+[31m-                'category_id' => $sports->id,[m
+[31m-                'price' => 1599.00,[m
+[31m-                'stock' => 55,[m
+[31m-                'description' => 'Adjustable dumbbells for home gym',[m
+[31m-            ],[m
+[31m-            // Beauty & Personal Care[m
+[31m-            [[m
+[31m-                'name' => 'Face Wash',[m
+[31m-                'sku' => 'BC-001',[m
+[31m-                'category_id' => $beauty->id,[m
+[31m-                'price' => 349.00,[m
+[31m-                'stock' => 120,[m
+[31m-                'description' => 'Gentle face wash for all skin types',[m
+[31m-            ],[m
+[31m-            [[m
+[31m-                'name' => 'Moisturizer Cream',[m
+[31m-                'sku' => 'BC-002',[m
+[31m-                'category_id' => $beauty->id,[m
+[31m-                'price' => 599.00,[m
+[31m-                'stock' => 85,[m
+[31m-                'description' => 'Hydrating moisturizer with natural ingredients',[m
+[31m-<<<<<<< Updated upstream[m
+[31m->>>>>>> Stashed changes[m
+[31m-=======[m
+[31m->>>>>>> Stashed changes[m
+[31m-            ],[m
+[31m-        ];[m
+[31m-[m
+[31m-        foreach ($products as $product) {[m
+[31m-<<<<<<< Updated upstream[m
+[31m-<<<<<<< Updated upstream[m
+[31m-            $category = Category::where('name', $product['category'])->first();[m
+[31m-            [m
+[31m-            if ($category) {[m
+[31m-                Product::firstOrCreate([m
+[31m-                    ['sku' => $product['sku']],[m
+[31m-                    [[m
+[31m-                        'name' => $product['name'],[m
+[31m-                        'category_id' => $category->id,[m
+[31m-                        'price' => $product['price'],[m
+[31m-                        'stock' => $product['stock'],[m
+[31m-                        'description' => $product['description'],[m
+[31m-                    ][m
+[31m-                );[m
+[31m-            }[m
+[31m-=======[m
+[31m-=======[m
+[31m->>>>>>> Stashed changes[m
+[31m-            Product::firstOrCreate([m
+[31m-                ['sku' => $product['sku']],[m
+[31m-                $product[m
+[31m-            );[m
+[31m-<<<<<<< Updated upstream[m
+[31m->>>>>>> Stashed changes[m
+[31m-=======[m
+[31m->>>>>>> Stashed changes[m
+[31m-        }[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/resources/views/admin/products/index.blade.php b/resources/views/admin/products/index.blade.php[m
+[1mindex 147cbb0..f59fe43 100644[m
+[1m--- a/resources/views/admin/products/index.blade.php[m
+[1m+++ b/resources/views/admin/products/index.blade.php[m
+[36m@@ -3,29 +3,11 @@[m
+ @section('title', 'Products')[m
+ [m
+ @section('content')[m
+[31m-<div class="d-flex justify-content-between align-items-center mb-4">[m
+[32m+[m[32m<div class="d-flex justify-content-between align-items-center mb-3">[m
+     <h2 class="mb-0">Products</h2>[m
+     <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Add Product</a>[m
+ </div>[m
+ [m
+[31m-<div class="mb-4">[m
+[31m-    <form method="GET" action="{{ route('admin.products.index') }}" id="categoryFilter">[m
+[31m-        <div class="d-flex gap-2 align-items-center">[m
+[31m-            <label for="category_id" class="form-label mb-0">Filter by Category:</label>[m
+[31m-            <select name="category_id" id="category_id" class="form-select" style="max-width: 300px;" onchange="document.getElementById('categoryFilter').submit();">[m
+[31m-                <option value="">All Categories</option>[m
+[31m-                @if(isset($categories) && count($categories))[m
+[31m-                    @foreach($categories as $category)[m
+[31m-                        <option value="{{ $category->id }}" @if(request('category_id') == $c

@@ -19,6 +19,17 @@ return new class extends Migration
             $table->decimal('price', 10, 2)->default(0);
             $table->integer('stock')->default(0);
             $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->integer('quantity_in_stock')->default(0);
+            $table->string('brand_name')->nullable();
+            $table->string('generic_name')->nullable();
+            $table->decimal('unit_current', 10, 2)->default(0);
+            $table->decimal('stock_tax', 10, 2)->default(0);
+            $table->decimal('promotion', 10, 2)->default(0);
+            $table->decimal('gross_weight', 10, 2)->nullable();
+            $table->decimal('net_weight', 10, 2)->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_delete')->default(false);
             $table->timestamps();
         });
     }
